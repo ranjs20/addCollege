@@ -3,7 +3,7 @@ import * as utils from "../utils/actionUtils";
 import { LoginSelectors } from "../utils/Selectors";
 
 async function performLogin(page, email, password) {
-  await expect(page.locator("#email")).toBeVisible();
+  await expect(page.locator(LoginSelectors.email)).toBeVisible();
   await page.fill(LoginSelectors.email, email);
   await utils.fills(page, LoginSelectors.password, password);
   await utils.click(page, LoginSelectors.loginButton);
