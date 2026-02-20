@@ -1,83 +1,67 @@
-import * as utils from "../utils/actionUtils";
 import * as selector from "../utils/Selectors";
-import * as data from "../utils/testData";
+export async function navigateToAddCollege(page) {
+  await Click(page, selector.InstitutionSelectors.institutionLink);
+  await Click(page, selector.InstitutionSelectors.addInstitutionBtn);
+  await Click(page, selector.InstitutionSelectors.addCollegeBtn);
+}
+async function Fill(page, sel, value) {
+  const element = page.locator(sel);
+  await element.waitFor({ state: "visible", timeout: 5000 });
+  await element.scrollIntoViewIfNeeded();
+  await element.fill(value);
+}
 
-async function basicInfo(page) {
-  await page.setInputFiles(selector.BasicInfoSelectors.logo, "logoPhoto.jpg");
-  await utils.fills(
-    page,
-    selector.BasicInfoSelectors.name,
-    data.BasicInfo.name
-  );
-  await utils.fills(
+async function Click(page, sel) {
+  const element = page.locator(sel);
+  await element.waitFor({ state: "visible", timeout: 10000 });
+  await element.scrollIntoViewIfNeeded();
+  await element.click();
+}
+
+export async function uploadLogo(page, filePath) {
+  const element = page.locator(selector.BasicInfoSelectors.logo);
+  await element.scrollIntoViewIfNeeded();
+  await element.setInputFiles(filePath);
+}
+
+export async function fillBasicInfo(page, basicData) {
+  await Fill(page, selector.BasicInfoSelectors.name, basicData.name);
+  await Fill(
     page,
     selector.BasicInfoSelectors.domainName,
-    data.BasicInfo.domainName
+    basicData.domainName
   );
-  await utils.click(page, selector.BasicInfoSelectors.accessTypeDropdown);
-  await utils.click(page, selector.BasicInfoSelectors.optionLocal);
-}
-async function contactInfo(page) {
-  await utils.fills(
-    page,
-    selector.ContactInfoSelectors.address,
-    data.ContactInfo.address
-  );
-  await utils.fills(
-    page,
-    selector.ContactInfoSelectors.email,
-    data.ContactInfo.email
-  );
-  await utils.fills(
-    page,
-    selector.ContactInfoSelectors.website,
-    data.ContactInfo.website
-  );
-  await utils.fills(
-    page,
-    selector.ContactInfoSelectors.number,
-    data.ContactInfo.number
-  );
-}
-async function adminInfo(page) {
-  await utils.fills(
-    page,
-    selector.AdminInfoSelectors.name,
-    data.adminInfo.name
-  ),
-    await utils.fills(
-      page,
-      selector.AdminInfoSelectors.email,
-      data.adminInfo.email
-    ),
-    await utils.fills(
-      page,
-      selector.AdminInfoSelectors.number,
-      data.adminInfo.number
-    ),
-    await utils.fills(
-      page,
-      selector.AdminInfoSelectors.designation,
-      data.adminInfo.designation
-    );
-}
-async function tags(page) {
-  await utils.click(page, selector.TagSelectors.administration);
-  await utils.click(page, selector.TagSelectors.adobe);
-  await utils.click(page, selector.TagSelectors.management);
+  await Click(page, selector.BasicInfoSelectors.accessTypeDropdown);
+  await Click(page, selector.BasicInfoSelectors.optionLocal);
 }
 
-export async function addCollege(page) {
-  await gotoAddCollege(page);
-  await basicInfo(page);
-  await contactInfo(page);
-  await adminInfo(page);
-  await tags(page);
-  await utils.click(page, selector.CreateSelectors.createCollegeBtn);
-  await utils.click(page, selector.CreateSelectors.createCollegeBtn);
+export async function fillContactInfo(page, contactData) {
+  await Fill(page, selector.ContactInfoSelectors.address, contactData.address);
+  await Fill(page, selector.ContactInfoSelectors.email, contactData.email);
+  await Fill(page, selector.ContactInfoSelectors.website, contactData.website);
+  await Fill(page, selector.ContactInfoSelectors.number, contactData.number);
 }
-async function gotoAddCollege(page) {
-  await utils.click(page, selector.InstitutionSelectors.institutionLink);
-  await utils.click(page, selector.InstitutionSelectors.addInstitutionBtn);
-  await utils.click(page, selector.InstitutionSelectors.addCollegeBtn);
+
+export async function fillAdminInfo(page, adminData) {
+  await Fill(page, selector.AdminInfoSelectors.name, adminData.name);
+  await Fill(page, selector.AdminInfoSelectors.email, adminData.email);
+  await Fill(page, selector.AdminInfoSelectors.number, adminData.number);
+  await Fill(
+    page,
+    selector.AdminInfoSelectors.designation,
+    adminData.designation
+  );
+}
+
+export async function selectTags(page) {
+  await Click(page, selector.TagSelectors.administration);
+  await Click(page, selector.TagSelectors.adobe);
+  await Click(page, selector.TagSelectors.management);
+}
+
+export async function submitCollegeForm(page) {
+  const btn = page.locator(selector.CreateSelectors.createCollegeBtn);
+  await btn.scrollIntoViewIfNeeded();
+  await btn.click();
+  await btn.click();
 }

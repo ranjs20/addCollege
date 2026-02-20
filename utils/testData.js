@@ -1,23 +1,29 @@
+import { faker } from "@faker-js/faker";
 export const LoginData = {
   email: process.env.EMAIL,
   password: process.env.PASSWORD,
 };
-export const BasicInfo = {
-  logoPath: "../logoPhoto.jpg",
-  name: "Test Person",
-  domainName: "test person",
-  accessType: "Default",
-  featureProfile: "basic",
-};
-export const ContactInfo = {
-  address: "Ohio",
-  email: "hellotest@gmail.com",
-  website: "https://yip.com",
-  number: "9833247777",
-};
-export const adminInfo = {
-  name: "isAdmin",
-  email: "admin676768686888az@gmail.com",
-  number: "9888984455",
-  designation: "Recruiter",
+export const generateTestData = () => {
+  return {
+    dynamicCollege: {
+      name: faker.company.name() + " University",
+      domainName: faker.internet.domainName(),
+
+      logoPath: "C:/Users/NITRo/Desktop/qa/Career_AddCollege/logoPhoto.jpg",
+      accessType: "Default",
+      featureProfile: "basic",
+    },
+    dynamicContact: {
+      address: faker.location.streetAddress(),
+      email: faker.internet.email(),
+      website: "https://yip.com",
+      number: "98" + faker.string.numeric(8),
+    },
+    dynamicAdmin: {
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      number: "99" + faker.string.numeric(8),
+      designation: faker.person.jobTitle(),
+    },
+  };
 };

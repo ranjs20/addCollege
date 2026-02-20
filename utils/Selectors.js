@@ -31,7 +31,7 @@ export const AdminInfoSelectors = {
 export const TagSelectors = {
   management: 'span:has-text("+2 Management")',
   administration: 'span:has-text("Administration")',
-  adobe: 'span:has-text("Adobe")',
+  adobe: 'span:text-is("Adobe")',
 };
 export const CreateSelectors = {
   createCollegeBtn: 'button[type="submit"]:has-text("Create new College")',
