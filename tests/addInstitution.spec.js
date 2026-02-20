@@ -2,14 +2,13 @@ import { test } from "@playwright/test";
 import { generateTestData } from "../utils/testData.js";
 import { validateUser } from "../pages/loginPage.js";
 import * as collegePage from "../pages/addInstitution.js";
-import { gotoPage } from "../utils/actionUtils.js";
 
 const data = generateTestData();
 
 test("Should create a college with random data using Faker", async ({
   page,
 }) => {
-  await gotoPage(page);
+  await page.goto(process.env.BASE_URL);
   await validateUser(page, process.env.EMAIL, process.env.PASSWORD);
 
   await collegePage.navigateToAddCollege(page);
