@@ -9,6 +9,7 @@ test("Should create a college with random data using Faker", async ({
   page,
 }) => {
   await page.goto(process.env.BASE_URL);
+
   await validateUser(page, process.env.EMAIL, process.env.PASSWORD);
 
   await collegePage.navigateToAddCollege(page);

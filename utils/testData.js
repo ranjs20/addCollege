@@ -1,8 +1,5 @@
 import { faker } from "@faker-js/faker";
-export const LoginData = {
-  email: process.env.EMAIL,
-  password: process.env.PASSWORD,
-};
+
 export const generateTestData = () => {
   return {
     dynamicCollege: {
